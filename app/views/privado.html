@@ -1,0 +1,40 @@
+<div class="container" style="margin-top:7px">
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s6"><a class="active" href="#resetas">Resetas</a></li>
+        <li class="tab col s6"><a href="#perfil">Perfil</a></li>
+      </ul>
+    </div>
+    <div id="resetas" class="col s12">
+      <div class="col s12">
+        <h4>Crear reseta</h4>
+        <form>
+          <div class="col s8">
+            <div class="input-field">
+              <i class="material-icons prefix">content_paste</i>
+              <input id="reseta" type="text" class="validate">
+              <label for="reseta">Crear una reseta</label>
+            </div>
+          </div>
+          <div class="col s4" style="padding-top:20px">
+            <button class="btn waves-effect waves-light" type="submit"
+              style="width:100%"
+            >Crear
+              <i class="material-icons right">add</i>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="col s12">
+        <h4>Mis resetas</h4>
+      </div>
+    </div>
+    <div id="perfil" class="col s12">
+      
+      <div class="input-field">
+        <input  id="nobreUsuario" type="text" ng-model="USUARIO.nombre" ng-change="USUARIO.$save()"/>
+      </div>
+    </div>
+  </div>
+</div>

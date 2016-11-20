@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Recetas</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/materialize/bin/materialize.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="recetasApp">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+
+    <!-- Cargador -->
+    
+    <div class="se-pre-con">
+      <div class="preloader-wrapper active">
+        <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+            <div class="circle"> </div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"> </div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegador -->
+
+    <div class="navbar-fixed" ng-controller="InicioCtrl">
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#!" class="brand-logo">Logo</a>
+          <a href="#" data-activates="mobile" class="button-collapse">
+            <i class="material-icons">menu</i>
+          </a>
+
+          <ul ng-show="USUARIO" class="right hide-on-med-and-down">
+            <li class="active"><a ui-sref="inicio">Inicio</a></li>
+            <li><a ui-sref="privado">Privado</a></li>
+            <li><a href="#" ng-click="userLogout()">Salir</a></li>
+          </ul>
+          <ul ng-show="!USUARIO" class="right hide-on-med-and-down">
+            <li><a href="#ingresar">Ingresar</a></li>
+            <li><a href="#registrarse">Registrarse</a></li>
+          </ul>
+
+          <div class="side-nav" id="mobile">
+            <ul ng-show="USUARIO">
+              <li class="active"><a ui-sref="inicio">Inicio</a></li>
+              <li><a ui-sref="privado">Privado</a></li>
+              <li><a ui-sref="#" ng-click="userLogout()">Salir</a></li>
+            </ul>
+            <ul ng-show="!USUARIO">
+              <li><a href="#ingresar">Ingresar</a></li>
+              <li><a href="#registrarse">Registrarse</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </nav>
+    </div>
+    
+    <!-- Vistas -->
+
+    <div ui-view=""></div>
+
+    <!-- Modals -->
+
+    <div id="ingresar" class="modal" ng-controller="InicioCtrl">
+        <div class="modal-content">
+            <h4>Ingresar</h4>
+            <form name="formuIngresar" ng-submit="userLogin(user)">
+                <div class="input-field">
+                    <input ng-model="user.email" id="email" type="email" class="validate" required/>
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-field">
+                    <input ng-model="user.password" id="password" type="password" class="validate" required/>
+                    <label for="password">Password</label>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit"
+                    style="margin-top:15px; width:100%"
+                    ng-disabled="formuIngresar.$invalid"
+                >
+                    Ingresar
+                </button>
+            </form>
+            <div class="loginSociales col s12">
+                <a class="waves-effect waves-light btn facebook">
+                    <i class="left fa fa-facebook"></i>
+                    facebook
+                </a>
+                <a class="waves-effect waves-light btn twitter">
+                    <i class="fa fa-twitter left"></i>
+                    twitter
+                </a>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-light btn-flat">Cerrar</a>
+        </div>
+    </div>
+
+    <div id="registrarse" class="modal" ng-controller="InicioCtrl">
+        <div class="modal-content">
+            <h4>Ingresar</h4>
+            <form name="formuRegister" ng-submit="userRegister(user)">
+                <div class="input-field">
+                    <input ng-model="user.nombre" id="nombre" type="text" class="validate" required/>
+                    <label for="nombre">Nombre</label>
+                </div>
+                <div class="input-field">
+                    <input ng-model="user.apellido" id="apellido" type="text" class="validate" required/>
+                    <label for="apellido">Apellido</label>
+                </div>
+                <div class="input-field">
+                    <input ng-model="user.email" id="email" type="email" class="validate" required/>
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-field">
+                    <input ng-model="user.password" id="password" type="password" class="validate" required/>
+                    <label for="password">Password</label>
+                </div>
+                <div class="input-field">
+                    <input ng-model="user.confirmPassworm" id="confirmPassword" type="password" class="validate" required/>
+                    <label for="confirmPassword">Confirmar Password</label>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit"
+                    style="margin-top:15px; width:100%"
+                    ng-disabled="formuRegister.$invalid"
+                >
+                    Registrarse
+                </button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-light btn-flat">Cerrar</a>
+        </div>
+    </div>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script> -->
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.js"></script>
+    <script src="bower_components/materialize/bin/materialize.js"></script>
+    <script src="bower_components/angular-lazy-img/release/angular-lazy-img.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/inicio.js"></script>
+        <script src="scripts/controllers/privado.js"></script>
+        <script src="scripts/services/authentication.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('.button-collapse').sideNav();
+            });
+        </script>
+        <!-- endbuild -->
+</body>
+</html>
