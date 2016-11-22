@@ -39,10 +39,10 @@ body {
 }
 
 .js #loader{
-  display: block; 
-  position: absolute; 
-  left: 100px; 
-  top: 0; 
+  display: block;
+  position: absolute;
+  left: 100px;
+  top: 0;
 }
 
 .se-pre-con{
@@ -65,6 +65,69 @@ body {
 .principalBG{
   background-color: coral;
 }
-/*.side-nav{
-  z-index: 999 !important;
-}*/
+
+.pasosModal{
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  z-index: 997;
+  top: 0;
+  display: none;
+  transition: all .5s;
+}
+
+.pasosModalContenedor{
+  display: flex;
+  justify-content: center;
+}
+
+.pasosModalInterno{
+  width: 55%;
+  min-height: 200px;
+  border-radius: 2px;
+  background-color: #fff;
+  position: absolute;
+  top: 10%;
+  margin:0  auto;
+  box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14),0 3px 14px 2px rgba(0,0,0,0.12),0 5px 5px -3px rgba(0,0,0,0.3);
+  z-index: 1003;
+  display: block;
+}
+
+.eliminarModal{
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  z-index: 997;
+  top: 0;
+  display: none;
+  transition: all .5s;
+}
+
+.eliminarModalContenedor{
+  display: flex;
+  justify-content: center;
+}
+
+.eliminarModalInterno{
+  width: 55%;
+  min-height: 150px;
+  border-radius: 2px;
+  background-color: #fff;
+  position: absolute;
+  top: 10%;
+  margin:0  auto;
+  box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14),0 3px 14px 2px rgba(0,0,0,0.12),0 5px 5px -3px rgba(0,0,0,0.3);
+  z-index: 1003;
+  display: block;
+}
+
+@media screen and (max-width: 600px) {
+    .eliminarModalInterno{
+      width: 90%;
+    }
+}

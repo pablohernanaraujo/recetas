@@ -1,34 +1,23 @@
 'use strict';
 
 angular.module('recetasApp')
-  .factory('Authentication', function (firebase, $rootScope, $timeout, $location, $firebaseObject) {
+  .factory('Authentication', function (Fire, firebase, $rootScope, $timeout, $location, $firebaseObject) {
 
-    var firebaseConfig= {
-      apiKey: 'AIzaSyCcUCRA3ae4PjQ4olgDqhO-WpwKGh8hr7I',
-      authDomain: 'resetasapp.firebaseapp.com',
-      databaseURL: 'https://resetasapp.firebaseio.com',
-      storageBucket: 'resetasapp.appspot.com',
-      messagingSenderId: '642728759157'
-    };
-
-    var firebaseApp = firebase.initializeApp(firebaseConfig);
-    var firebaseAuth = firebaseApp.auth();
-    var firebaseDb = firebaseApp.database();
-    var firebaseST = firebase.storage();
-
-    var usuarioActual = function(){
-      firebaseAuth.onAuthStateChanged(function(user) {
+    var usuarioActual = function(recetaId){
+      Fire.firebaseAuth().onAuthStateChanged(function(user) {
         if(user){
-          var usu = firebaseDb.ref('usuarios/' + user.uid);
+          var usu = Fire.firebaseDb().ref('usuarios/' + user.uid);
           var cargandoUsuario = $firebaseObject(usu);
           cargandoUsuario.$loaded()
             .then(function(){
               $rootScope.USUARIO = cargandoUsuario;
               $('.se-pre-con').fadeOut('slow');
+              misRecetas(recetaId);
             })
             .catch(function(error){
               console.log(error);
             });
+
         }else{
           $rootScope.USUARIO = '';
           $location.path('/');
@@ -36,13 +25,27 @@ angular.module('recetasApp')
         }
       });
     };
-    
+
+    var misRecetas = function(recetaId){
+      var refMisRecetas = Fire.firebaseDb().ref('recetas/' + $rootScope.USUARIO.id);
+      var misRecetas = $firebaseObject(refMisRecetas);
+      $rootScope.listadoRecetas = misRecetas;
+      miReceta(recetaId);
+    };
+
+    var miReceta = function(recetaId){
+      if(recetaId !== undefined){
+        var refReceta = Fire.firebaseDb().ref('recetas/' + $rootScope.USUARIO.id).child(recetaId);
+        var receta = $firebaseObject(refReceta);
+        $rootScope.RECETA = receta;
+      }
+    };
 
     return{
       registrarse: function(user){
-        firebaseAuth.createUserWithEmailAndPassword(user.email,user.password)
+        Fire.firebaseAuth().createUserWithEmailAndPassword(user.email,user.password)
         .then(function(regUser){
-          firebaseDb.ref('usuarios').child(regUser.uid).set({
+          Fire.firebaseDb().ref('usuarios').child(regUser.uid).set({
             nombre: user.nombre,
             apellido: user.apellido,
             email: user.email,
@@ -59,13 +62,13 @@ angular.module('recetasApp')
         });
       },
       logout: function(){
-        firebaseAuth.signOut().then(function() {
+        Fire.firebaseAuth().signOut().then(function() {
         }, function(error) {
           console.log(error);
         });
       },
       login: function(user, fb){
-        firebaseAuth.signInWithEmailAndPassword(user.email,user.password)
+        Fire.firebaseAuth().signInWithEmailAndPassword(user.email,user.password)
         .then(function(){
           var data = 'entramos';
           return fb(data);
@@ -77,6 +80,9 @@ angular.module('recetasApp')
       },
       requireAuth: function(){
         usuarioActual();
+      },
+      usuarioActual: function(recetaId){
+        usuarioActual(recetaId);
       }
     };
 

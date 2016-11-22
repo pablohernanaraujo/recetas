@@ -8,8 +8,9 @@
  * Controller of the recetasApp
  */
 angular.module('recetasApp')
-  .controller('InicioCtrl', function (Authentication, $scope) {
+  .controller('InicioCtrl', function (Authentication, $scope, $rootScope) {
     $('.button-collapse').sideNav('hide');
+    $rootScope.PAGE = 'inicio';
 
   	$scope.userRegister = function(user){
       Authentication.registrarse(user);

@@ -46,6 +46,17 @@ angular
         }
       })
 
+      .state('detalles',{
+        url: '/privado/:id',
+        templateUrl: 'views/detalles.html',
+        controller: 'DetallesCtrl',
+        resolve: {
+          currentAuth: function(Authentication){
+            return Authentication.requireAuth();
+          }
+        }
+      })
+
       ;
 
       $urlRouterProvider.otherwise('/inicio');

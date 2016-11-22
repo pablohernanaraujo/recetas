@@ -25,7 +25,7 @@
     <!-- Add your site or application content here -->
 
     <!-- Cargador -->
-    
+
     <div class="se-pre-con">
       <div class="preloader-wrapper active">
         <div class="spinner-layer spinner-blue-only">
@@ -53,8 +53,8 @@
           </a>
 
           <ul ng-show="USUARIO" class="right hide-on-med-and-down">
-            <li class="active"><a ui-sref="inicio">Inicio</a></li>
-            <li><a ui-sref="privado">Privado</a></li>
+            <li ng-class="{'active': PAGE === 'inicio'}"><a ui-sref="inicio">Inicio</a></li>
+            <li ng-class="{'active': PAGE === 'privado'}"><a ui-sref="privado">{{USUARIO.apellido}}</a></li>
             <li><a href="#" ng-click="userLogout()">Salir</a></li>
           </ul>
           <ul ng-show="!USUARIO" class="right hide-on-med-and-down">
@@ -64,8 +64,8 @@
 
           <div class="side-nav" id="mobile">
             <ul ng-show="USUARIO">
-              <li class="active"><a ui-sref="inicio">Inicio</a></li>
-              <li><a ui-sref="privado">Privado</a></li>
+              <li ng-class="{'active': PAGE === 'inicio'}"><a ui-sref="inicio">Inicio</a></li>
+              <li ng-class="{'active': PAGE === 'privado'}"><a ui-sref="privado">{{USUARIO.apellido}}</a></li>
               <li><a ui-sref="#" ng-click="userLogout()">Salir</a></li>
             </ul>
             <ul ng-show="!USUARIO">
@@ -77,7 +77,7 @@
         </div>
       </nav>
     </div>
-    
+
     <!-- Vistas -->
 
     <div ui-view=""></div>
@@ -191,7 +191,10 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/inicio.js"></script>
         <script src="scripts/controllers/privado.js"></script>
+        <script src="scripts/controllers/detalles.js"></script>
+        <script src="scripts/services/firebaseService.js"></script>
         <script src="scripts/services/authentication.js"></script>
+        <script src="scripts/services/data.js"></script>
         <script>
             $(document).ready(function(){
                 $('.button-collapse').sideNav();

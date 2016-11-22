@@ -1,0 +1,224 @@
+<div class="container">
+	<div class="row">
+		<div class="col s12" style="padding: 20px 0px">
+			<a ui-sref="privado" class="waves-effect waves-light btn">
+				volver
+				<i class="material-icons left">arrow_back</i>
+			</a>
+		</div>
+		<div class="col s12">
+			<div class="col s12 m4">
+				<h5>Nombre de la receta</h5>
+			</div>
+			<div class="col s12 m8">
+				<div class="input-field">
+		          <input id="recetaNombre" type="text" ng-model="RECETA.nombre" ng-change="RECETA.$save()"
+		          >
+		          <label ng-class="RECETA.nombre ? 'active':''" for="recetaNombre">Nombre</label>
+		        </div>
+			</div>
+		</div>
+		<div class="col s12">
+			<div class="col s12 m4">
+				<h5>Descripción</h5>
+			</div>
+			<div class="col s12 m8">
+				<div class="input-field">
+		          <textarea id="textarea1" class="materialize-textarea" ng-model="RECETA.descripcion" ng-change="RECETA.$save()" length="200"></textarea>
+		          <label ng-class="RECETA.descripcion ? 'active':''" for="textarea1">Ingrese una descripción</label>
+		        </div>
+			</div>
+		</div>
+		<div class="col s12">
+			<div class="col s12 m4">
+				<h5>Imagen</h5>
+			</div>
+			<div class="col s12 m8">
+				<form name="formImagen" ng-submit="guardarImagen()">
+				    <div class="file-field input-field">
+				      	<div class="btn">
+				        	<span>File</span>
+				       	 	<input type="file" required />
+				      	</div>
+				      	<div class="file-path-wrapper">
+				        	<input class="file-path validate" type="text" ng-model="RECETA.imagen.nombre" required />
+				      	</div>
+				    </div>
+				    <button
+			            class="btn waves-effect waves-light col s12"
+			            type="submit"
+			            ng-disabled="formImagen.$invalid"
+			            >
+			              guardar imagen
+			        </button>
+				</form>
+			</div>
+		</div>
+		<div class="col s12">
+			<div class="col s12 m4">
+				<h5>Paso a paso</h5>
+			</div>
+			<div class="col s12 m8">
+				<form name="formPaso" ng-submit="guardarPaso()">
+					<div class="input-field">
+			          <textarea
+			          	id="textarea2"
+			          	class="materialize-textarea"
+			          	length="300"
+			          	ng-model="paso" required></textarea>
+			          <label for="textarea2">Ingrese paso a paso</label>
+			        </div>
+			        <button class="btn waves-effect waves-light col s12" type="submit"
+			        ng-disabled="formPaso.$invalid">	guardar paso
+					</button>
+				</form>
+				<div class="col s12" style="height: 20px"></div>
+	        <div ng-show="!RECETA.pasos">
+	        	<h5>No tienes pasos creados.</h5>
+	        </div>
+	        <div ng-show="RECETA.pasos">
+	        	<h4>Listado de los pasos a seguir.</h4>
+	        	<div ng-repeat="paso in RECETA.pasos">
+	        		<h5>Paso {{$index + 1}}</h5>
+							<ul class="collection">
+				        <li class="collection-item">
+				        	<div class="teal-text text-lighten-1">{{paso.texto}}
+					        	<a href=""
+					        		class="secondary-content"
+					        		ng-click="abrirEliminarModal(paso, 'Paso', ($index + 1), RECETA.id)"
+					        		style="color: #ef5350"
+					        	>
+					        		<i class="material-icons">delete</i>
+					        	</a>
+					        	<a href=""
+					        		class="secondary-content"
+					        		ng-click="abrirPasosModal(paso, 'Paso',($index + 1), RECETA.id)"
+					        		style="margin-right: 10px"
+					        	>
+					        		<i class="material-icons">mode_edit</i>
+					        	</a>
+									</div>
+				        </li>
+				    	</ul>
+				    </div>
+					</div>
+	      </div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<div class="col s12 m4">
+					<h5>Ingredientes</h5>
+				</div>
+				<div class="col s12 m8">
+					<form name="formIngrediente" ng-submit="guardarIngrediente()">
+						<div class="input-field">
+									<input id="crearIngrediente" type="text" ng-model="ingrediente" required>
+				          <label for="crearIngrediente">Ingrese un ingrediente</label>
+				        </div>
+				        <button class="btn waves-effect waves-light col s12" type="submit"
+				        ng-disabled="formIngrediente.$invalid">	guardar ingrediente
+						</button>
+					</form>
+					<div class="col s12" style="height: 20px"></div>
+		        <div ng-show="!RECETA.ingredientes">
+		        	<h5>No tienes ingredientes creados.</h5>
+		        </div>
+		        <div ng-show="RECETA.ingredientes">
+		        	<h4>Listado de los ingredientesr.</h4>
+		        	<div ng-repeat="ingrediente in RECETA.ingredientes">
+		        		<h5>Ingrediente {{$index + 1}}</h5>
+								<ul class="collection">
+					        <li class="collection-item">
+					        	<div class="teal-text text-lighten-1">{{ingrediente.texto}}
+						        	<a href=""
+						        		class="secondary-content"
+						        		ng-click="abrirEliminarModal(ingrediente, 'Ingrediente', ($index + 1), RECETA.id)"
+						        		style="color: #ef5350"
+						        	>
+						        		<i class="material-icons">delete</i>
+						        	</a>
+						        	<a href=""
+						        		class="secondary-content"
+						        		ng-click="abrirPasosModal(ingrediente, 'Ingrediente', ($index + 1), RECETA.id)"
+						        		style="margin-right: 10px"
+						        	>
+						        		<i class="material-icons">mode_edit</i>
+						        	</a>
+										</div>
+					        </li>
+					    	</ul>
+					    </div>
+						</div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- MODALES -->
+
+<div class="pasosModal">
+	<div class="pasosModalContenedor">
+		<div class="pasosModalInterno">
+			<div class="row">
+				<div class="col s12" style="padding: 0 20px">
+					<h4>{{seccion}} {{pasoIndex}}</h4>
+					<textarea
+			          	id="textarea2"
+			          	class="materialize-textarea"
+			          	length="300"
+			          	ng-model="pasoTexto"></textarea>
+			        <button
+			        	class="btn waves-effect waves-light right"
+			        	type="submit"
+			        	style="margin-bottom: 20px"
+			        	ng-click="cambiarPaso(pasoTexto, pasoId, recetaId, seccion)"
+			        >
+			        	guardar
+					</button>
+				</div>
+				<div
+					class="col s12"
+					style="border-top: 1px solid rgba(0,0,0,0.1);padding: 20px 20px 0px"
+				>
+					<a
+						class="waves-effect waves-light btn-flat right"
+						ng-click="cerrarPasosModal()"
+					>
+						cerrar
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="eliminarModal">
+	<div class="eliminarModalContenedor">
+		<div class="eliminarModalInterno">
+			<div class="row">
+				<div class="col s12" style="padding: 0 20px">
+					<h5>Esta seguro que desea eliminar</h5>
+					<h4>{{seccion}} {{eliminarIndex}}</h4>
+				</div>
+				<div
+					class="col s12"
+					style="border-top: 1px solid rgba(0,0,0,0.1);padding: 20px 20px 0px"
+				>
+					<a class="waves-effect waves-light btn red lighten-1"
+					ng-click="eliminarPaso(eliminar, eliminarRecetaId, seccion)">eliminar</a>
+					<a
+						class="waves-effect waves-light btn-flat right"
+						ng-click="cerrarEliminarModal()"
+					>
+						cerrar
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

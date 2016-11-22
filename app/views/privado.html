@@ -2,39 +2,88 @@
   <div class="row">
     <div class="col s12">
       <ul class="tabs">
-        <li class="tab col s6"><a class="active" href="#resetas">Resetas</a></li>
+        <li class="tab col s6"><a class="active" href="#recetas">Resetas</a></li>
         <li class="tab col s6"><a href="#perfil">Perfil</a></li>
       </ul>
     </div>
-    <div id="resetas" class="col s12">
+    <div id="recetas" class="col s12">
+
       <div class="col s12">
-        <h4>Crear reseta</h4>
-        <form>
-          <div class="col s8">
-            <div class="input-field">
-              <i class="material-icons prefix">content_paste</i>
-              <input id="reseta" type="text" class="validate">
-              <label for="reseta">Crear una reseta</label>
-            </div>
+        <h4>Crear receta</h4>
+        <form name="formCrearReceta" ng-submit="crearReceta(newReceta)">
+          <div class="input-field col s10">
+            <i class="material-icons prefix">content_paste</i>
+            <input
+              id="crearReceta"
+              type="text"
+              class="validate"
+              ng-model="newReceta"
+              required />
+            <label for="crearReceta">Crear una receta</label>
           </div>
-          <div class="col s4" style="padding-top:20px">
-            <button class="btn waves-effect waves-light" type="submit"
-              style="width:100%"
-            >Crear
-              <i class="material-icons right">add</i>
-            </button>
-          </div>
+          <button
+            class="btn waves-effect waves-light col s2"
+            type="submit"
+            ng-disabled="formCrearReceta.$invalid"
+            style="margin-top: 5px"
+            >
+              crear
+          </button>
         </form>
       </div>
       <div class="col s12">
-        <h4>Mis resetas</h4>
+        <h4>Mis recetas</h4>
+        <ul class="collection">
+          <li class="collection-item" ng-repeat="receta in listadoRecetas">
+            <div class="teal-text text-lighten-1">{{receta.nombre}}
+              <a href=""
+		        		class="secondary-content"
+		        		ng-click="abrirEliminarModal(receta)"
+		        		style="color: #ef5350"
+		        	>
+		        		<i class="material-icons">delete</i>
+		        	</a>
+		        	<a ui-sref="detalles({id: receta.id})"
+		        		class="secondary-content"
+		        		style="margin-right: 10px"
+		        	>
+		        		<i class="material-icons">mode_edit</i>
+		        	</a>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
     <div id="perfil" class="col s12">
-      
       <div class="input-field">
         <input  id="nobreUsuario" type="text" ng-model="USUARIO.nombre" ng-change="USUARIO.$save()"/>
       </div>
     </div>
   </div>
+</div>
+
+<div class="eliminarModal">
+	<div class="eliminarModalContenedor">
+		<div class="eliminarModalInterno">
+			<div class="row">
+				<div class="col s12" style="padding: 0 20px">
+					<h5>Esta seguro que desea eliminar la receta</h5>
+					<h4>{{eliminarReceta.nombre}}</h4>
+				</div>
+				<div
+					class="col s12"
+					style="border-top: 1px solid rgba(0,0,0,0.1);padding: 20px 20px 0px"
+				>
+					<a class="waves-effect waves-light btn red lighten-1"
+					ng-click="eliminarUnaReceta(eliminarReceta)">eliminar</a>
+					<a
+						class="waves-effect waves-light btn-flat right"
+						ng-click="cerrarEliminarModal()"
+					>
+						cerrar
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
