@@ -15,6 +15,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/font-awesome.min.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/styles.css">
     <!-- endbuild -->
   </head>
   <body ng-app="recetasApp">
@@ -27,39 +28,35 @@
     <!-- Cargador -->
 
     <div class="se-pre-con">
-      <div class="preloader-wrapper active">
-        <div class="spinner-layer spinner-blue-only">
-          <div class="circle-clipper left">
-            <div class="circle"> </div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"> </div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-      </div>
+      <img src="images/tastylogosolo.png" alt="tasty house logo" width="80" height="80">
     </div>
 
     <!-- Navegador -->
 
     <div class="navbar-fixed" ng-controller="NavCtrl">
       <nav>
-        <div class="nav-wrapper">
-          <a href="/" class="brand-logo">Logo</a>
+        <div class="nav-wrapper white">
+          <a href="/" class="brand-logo">
+            <img src="images/tastylogo.png" alt="tasty logo" width="230">
+          </a>
           <a href="#" data-activates="nav-mobile" data-sidenav="left" class="button-collapse" data-closeonclick="false">
-            <i class="material-icons">menu</i>
+            <i class="material-icons grey-text darken-4-text">menu</i>
           </a>
 
           <ul ng-show="USUARIO" class="right hide-on-med-and-down">
-            <li ng-class="{'active': PAGE === 'inicio'}"><a ui-sref="inicio">Inicio</a></li>
-            <li ng-class="{'active': PAGE === 'privado'}"><a ui-sref="privado">{{USUARIO.apellido}}</a></li>
-            <li><a href="#" ng-click="userLogout()">Salir</a></li>
+            <li ng-class="{'active': PAGE === 'inicio'}">
+                <a ui-sref="inicio" class="grey-text darken-4-text">Inicio</a>
+            </li>
+            <li ng-class="{'active': PAGE === 'privado'}">
+                <a ui-sref="privado" class="grey-text darken-4-text">{{USUARIO.apellido}}</a>
+            </li>
+            <li>
+                <a href="#" ng-click="userLogout()" class="grey-text darken-4-text">Salir</a>
+            </li>
           </ul>
           <ul ng-show="!USUARIO" class="right hide-on-med-and-down">
-            <li><a href="#ingresar">Ingresar</a></li>
-            <li><a href="#registrarse">Registrarse</a></li>
+            <li><a href="#ingresar" class="grey-text darken-4-text">Ingresar</a></li>
+            <li><a href="#registrarse" class="grey-text darken-4-text">Registrarse</a></li>
           </ul>
 
           <div class="side-nav" id="nav-mobile">
@@ -93,17 +90,17 @@
                     <label for="email">Email</label>
                 </div>
                 <div class="input-field">
-                    <input ng-model="user.password" id="password" type="password" class="validate" required/>
+                    <input ng-model="user.password" id="password" type="password" required/>
                     <label for="password">Password</label>
                 </div>
-                <button class="btn waves-effect waves-light" type="submit"
+                <button class="btn waves-effect waves-light bg-principal" type="submit"
                     style="margin-top:15px; width:100%"
                     ng-disabled="formuIngresar.$invalid"
                 >
                     Ingresar
                 </button>
             </form>
-            <div class="loginSociales col s12">
+            <!-- <div class="loginSociales col s12">
                 <a class="waves-effect waves-light btn facebook">
                     <i class="left fa fa-facebook"></i>
                     facebook
@@ -112,7 +109,7 @@
                     <i class="fa fa-twitter left"></i>
                     twitter
                 </a>
-            </div>
+            </div> -->
         </div>
         <div class="modal-footer">
             <a href="#!" class=" modal-action modal-close waves-effect waves-light btn-flat">Cerrar</a>
@@ -124,11 +121,11 @@
             <h4>Ingresar</h4>
             <form name="formuRegister" ng-submit="userRegister(user)">
                 <div class="input-field">
-                    <input ng-model="user.nombre" id="nombre" type="text" class="validate" required/>
+                    <input ng-model="user.nombre" id="nombre" type="text" required/>
                     <label for="nombre">Nombre</label>
                 </div>
                 <div class="input-field">
-                    <input ng-model="user.apellido" id="apellido" type="text" class="validate" required/>
+                    <input ng-model="user.apellido" id="apellido" type="text" required/>
                     <label for="apellido">Apellido</label>
                 </div>
                 <div class="input-field">
@@ -136,14 +133,14 @@
                     <label for="email">Email</label>
                 </div>
                 <div class="input-field">
-                    <input ng-model="user.password" id="password" type="password" class="validate" required/>
+                    <input ng-model="user.password" id="password" type="password" required/>
                     <label for="password">Password</label>
                 </div>
                 <div class="input-field">
-                    <input ng-model="user.confirmPassworm" id="confirmPassword" type="password" class="validate" required/>
+                    <input ng-model="user.confirmPassworm" id="confirmPassword" type="password" required/>
                     <label for="confirmPassword">Confirmar Password</label>
                 </div>
-                <button class="btn waves-effect waves-light" type="submit"
+                <button class="btn waves-effect waves-light bg-principal" type="submit"
                     style="margin-top:15px; width:100%"
                     ng-disabled="formuRegister.$invalid"
                 >

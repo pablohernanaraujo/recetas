@@ -21,13 +21,8 @@ angular.module('recetasApp')
     $scope.userLogin = function(user){
       Authentication.login(user, function(fb){
         $('#ingresar').modal('close');
+        $('.button-collapse').sideNav('hide');
       });
-    };
-
-    $scope.abrirMenu = function(){
-      console.log('abrir menu');
-      // $('.button-collapse').sideNav('destroy');
-      // $('.button-collapse').sideNav('show');
     };
 
     $(document).ready(function(){

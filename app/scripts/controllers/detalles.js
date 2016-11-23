@@ -40,7 +40,6 @@ angular.module('recetasApp')
     };
 
     $scope.abrirPasosModal = function(paso, seccion, index, recetaId){
-      console.log(index);
       $('.pasosModal').css({
         display: 'block'
       });
