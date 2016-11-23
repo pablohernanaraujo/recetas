@@ -193,4 +193,10 @@ body {
     .eliminarModalInterno{
       width: 90%;
     }
+    .buscadorContenedor ul{
+      width: 15%;
+    }
+    .buscadorContenedor input{
+      width: 75%;
+    }
 }

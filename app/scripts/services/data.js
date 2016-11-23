@@ -114,10 +114,10 @@ angular.module('recetasApp')
         guardarIngrediente.set(newIngrediente);
         Materialize.toast( 'Ingrediente guardado exitosamente' , 4000, 'green lighten-1');
       },
-      cambiarIngrediente: function(paso, pasoId, recetaId){
+      cambiarIngrediente: function(ingrediente, ingredienteId, recetaId){
         var cambiarIngrediente = Fire.firebaseDb().ref('recetas/'+$rootScope.USUARIO.id +'/'+recetaId)
-          .child('ingredientes/'+ pasoId).update({
-            texto: paso
+          .child('ingredientes/'+ ingredienteId).update({
+            texto: ingrediente
           });
 
         Materialize.toast( 'Ingrediente editado exitosamente' , 4000, 'green lighten-1');

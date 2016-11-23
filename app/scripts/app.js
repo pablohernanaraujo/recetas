@@ -19,7 +19,8 @@ angular
     'ngTouch',
     'ui.router',
     'firebase',
-    'angularLazyImg'
+    'angularLazyImg',
+    'ui.materialize'
   ])
   .run(function(Authentication){
     angular.element(document).ready(function () {
