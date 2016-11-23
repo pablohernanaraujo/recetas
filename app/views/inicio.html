@@ -38,3 +38,23 @@
     </div>
   </div>
 </div>
+
+<!-- BUSCAR BOTON -->
+
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large waves-effect waves-light red" ng-click="abrirBuscador()">
+    <i class="large material-icons">search</i>
+  </a>
+</div>
+
+<div class="buscadorContenedor">
+  <i class="material-icons">search</i>
+  <form>
+    <input id="buscador" type="text">
+  </form>
+  <ul>
+    <li>
+      <a ng-click="cerrarBuscador()">Cerrar</a>
+    </li>
+  </ul>
+</div>

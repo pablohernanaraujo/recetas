@@ -126,6 +126,69 @@ body {
   display: block;
 }
 
+/* BUSCADOR */
+
+.buscadorContenedor{
+  position:fixed;
+  bottom: -75px;
+  width: 100%;
+  height: 75px;
+  background-color: #ee6e73;
+  transition: all .6s;
+}
+.buscadorContenedor i{
+  width: 10%;
+  float: left;
+  height: 74px;
+  line-height: 74px;
+  color: #fff;
+  text-align: center;
+}
+.buscadorContenedor input{
+  width: 80%;
+  float: left;
+  height: 74px;
+  margin: 0;
+  color: #fff;
+  border: none;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.buscadorContenedor input:focus{
+  background-color: rgba(255,255,255,0.1);
+}
+.buscadorContenedor input[type=text]:focus {
+   border-bottom: none;
+   box-shadow: none;
+ }
+.buscadorContenedor ul{
+  width: 10%;
+  height: 74px;
+  float: left;
+  margin: 0;
+}
+.buscadorContenedor ul li{
+  height: 100%;
+  transition: background-color .3s;
+}
+.buscadorContenedor ul li a{
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: block;
+  line-height: 74px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px
+}
+.buscadorContenedor ul li:hover{
+  background-color: rgba(0,0,0,0.1);
+}
+
+.fixed-action-btn{
+  transition: all .4s;
+}
+
 @media screen and (max-width: 600px) {
     .eliminarModalInterno{
       width: 90%;

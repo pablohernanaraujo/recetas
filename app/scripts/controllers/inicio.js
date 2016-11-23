@@ -26,6 +26,26 @@ angular.module('recetasApp')
       });
     };
 
+    $scope.abrirBuscador = function(){
+      $('.fixed-action-btn').css({
+        right: '-60px'
+      });
+      $('.buscadorContenedor').css({
+        bottom: '0px'
+      });
+      $('#buscador').focus();
+    };
+
+    $scope.cerrarBuscador = function(){
+      $('.fixed-action-btn').css({
+        right: '20px'
+      });
+      $('.buscadorContenedor').css({
+        bottom: '-75px'
+      });
+      $('#buscador').focusout();
+    };
+
     $(document).ready(function(){
       $('.modal').modal();
     });
