@@ -29,7 +29,7 @@ angular.module('recetasApp')
     var misRecetas = function(recetaId){
       var refMisRecetas = Fire.firebaseDb().ref('recetas/' + $rootScope.USUARIO.id);
       var misRecetas = $firebaseObject(refMisRecetas);
-      $rootScope.listadoRecetas = misRecetas;
+      $rootScope.LISTADORECETAS = misRecetas;
       miReceta(recetaId);
     };
 
@@ -83,6 +83,44 @@ angular.module('recetasApp')
       },
       usuarioActual: function(recetaId){
         usuarioActual(recetaId);
+      },
+      subirAvatar: function(avatar){
+
+        var guardarAvatar = Fire.firebaseST().ref().child('avatares/' + avatar.name).put(avatar);
+
+        guardarAvatar.on('state_changed', function(snapshot){
+        }, function(error){
+          console.log(error);
+          Materialize.toast( error.message , 4000, 'red lighten-1');
+        }, function(){
+
+          var refReceta = Fire.firebaseDb().ref('usuarios/' + $rootScope.USUARIO.id);
+          refReceta.update({
+            avatar:{
+              url:guardarAvatar.snapshot.downloadURL,
+              nombre: avatar.name,
+              size: avatar.size
+            }
+          });
+          Materialize.toast( 'Avatar guardada exitosamente' , 4000, 'green lighten-1');
+
+          /* aca updateo los datos del usuario en las recetas para cambiar el
+          avatar en todas */
+
+          angular.forEach($rootScope.LISTADORECETAS, function(value, key) {
+            var actualizarAvatar = Fire.firebaseDb().ref('recetas/' + $rootScope.USUARIO.id + '/'+ value.id).child('usuario').update({
+              avatar:{
+                url:guardarAvatar.snapshot.downloadURL,
+                nombre: avatar.name,
+                size: avatar.size
+              }
+            });
+          });
+
+          /* -------------------------------------------- */
+        }
+
+        );
       }
     };
 

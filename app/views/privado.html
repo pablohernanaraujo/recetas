@@ -2,30 +2,32 @@
   <div class="row">
     <div class="col s12">
       <ul class="tabs">
-        <li class="tab col s6"><a class="active" href="#recetas">Resetas</a></li>
-        <li class="tab col s6"><a href="#perfil">Perfil</a></li>
+        <li class="tab col s6">
+          <a class="active" href="#recetas">Resetas</a>
+        </li>
+        <li class="tab col s6">
+          <a href="#perfil">Perfil</a>
+        </li>
       </ul>
     </div>
     <div id="recetas" class="col s12">
-
       <div class="col s12">
         <h4>Crear receta</h4>
         <form name="formCrearReceta" ng-submit="crearReceta(newReceta)">
-          <div class="input-field col s10">
+          <div class="input-field col s12 m10">
             <i class="material-icons prefix">content_paste</i>
             <input
               id="crearReceta"
               type="text"
-              class="validate"
               ng-model="newReceta"
               required />
             <label for="crearReceta">Crear una receta</label>
           </div>
           <button
-            class="btn waves-effect waves-light col s2"
+            class="btn waves-effect waves-light col s12 m2 bg-principal"
             type="submit"
             ng-disabled="formCrearReceta.$invalid"
-            style="margin-top: 5px"
+            style="margin-top: 12px"
             >
               crear
           </button>
@@ -34,8 +36,8 @@
       <div class="col s12">
         <h4>Mis recetas</h4>
         <ul class="collection">
-          <li class="collection-item" ng-repeat="receta in listadoRecetas">
-            <div class="teal-text text-lighten-1">{{receta.nombre}}
+          <li class="collection-item" ng-repeat="receta in LISTADORECETAS">
+            <div class="color-principal">{{receta.nombre}}
               <a href=""
 		        		class="secondary-content"
 		        		ng-click="abrirEliminarModal(receta)"
@@ -55,8 +57,54 @@
       </div>
     </div>
     <div id="perfil" class="col s12">
-      <div class="input-field">
-        <input  id="nobreUsuario" type="text" ng-model="USUARIO.nombre" ng-change="USUARIO.$save()"/>
+      <div class="col s12">
+
+        <div class="col s12 m4">
+          <h5>Nombre</h5>
+        </div>
+        <div class="col s12 m8">
+          <div class="input-field">
+            <input  id="nombreUsuario" type="text" ng-model="USUARIO.nombre" ng-change="USUARIO.$save()"/>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <h5>Apellido</h5>
+        </div>
+        <div class="col s12 m8">
+          <div class="input-field">
+            <input  id="apellidoUsuario" type="text" ng-model="USUARIO.apellido" ng-change="USUARIO.$save()"/>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <h5>Avatar</h5>
+        </div>
+        <div class="col s12 m8">
+          <form name="formAvatar" ng-submit="guardarAvatar()">
+            <div class="file-field input-field">
+              <div class="btn bg-principal">
+                <span>File</span>
+                <input type="file" required />
+              </div>
+              <div class="file-path-wrapper">
+                <input
+                  class="file-path"
+                  type="text"
+                  ng-model="USUARIO.avatar.nombre"
+                  required />
+              </div>
+            </div>
+            <button
+              class="btn waves-effect waves-light col s12 bg-principal"
+              type="submit"
+              ng-disabled="formAvatar.$invalid"
+            >
+              guardar avatar
+		        </button>
+          </form>
+        </div>
+
       </div>
     </div>
   </div>
@@ -67,7 +115,7 @@
 		<div class="eliminarModalInterno">
 			<div class="row">
 				<div class="col s12" style="padding: 0 20px">
-					<h5>Esta seguro que desea eliminar la receta</h5>
+					<h6>Esta seguro que desea eliminar la receta</h6>
 					<h4>{{eliminarReceta.nombre}}</h4>
 				</div>
 				<div

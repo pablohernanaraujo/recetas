@@ -1,21 +1,52 @@
 <div class="container">
 	<div class="row">
 		<div class="col s12" style="padding: 20px 0px">
-			<a ui-sref="privado" class="waves-effect waves-light btn">
+			<a ui-sref="privado" class="waves-effect waves-light btn bg-principal">
 				volver
 				<i class="material-icons left">arrow_back</i>
 			</a>
 		</div>
+		<div class="col s12">
+      <div class="card ">
+        <div class="card-content ">
+          <span class="card-title">Aviso importante</span>
+          <p>
+						Para poner la receta online se deberan llenar todos los campos.
+					</p>
+					<p>
+						Asi el boton se habilitara.
+					</p>
+        </div>
+        <div class="card-action">
+					<a
+						class="btn waves-effect waves-light bg-principal"
+						ng-disabled="!RECETA.imagen.size || !RECETA.nombre || !RECETA.descripcion || !RECETA.pasos || !RECETA.ingredientes || RECETA.status !== 1"
+						ng-click="ponerOnline()"
+					>
+						poner online
+				    <i class="material-icons right">file_upload</i>
+				  </a>
+        </div>
+				<div class="enlinea-contenedor">
+					<p ng-show="RECETA.status === 2" class="enlinea teal">
+						Receta Online
+					</p>
+					<p ng-show="RECETA.status === 1" class="fueradelinea">
+						Receta Offline
+					</p>
+				</div>
+      </div>
+    </div>
 		<div class="col s12">
 			<div class="col s12 m4">
 				<h5>Nombre de la receta</h5>
 			</div>
 			<div class="col s12 m8">
 				<div class="input-field">
-		          <input id="recetaNombre" type="text" ng-model="RECETA.nombre" ng-change="RECETA.$save()"
-		          >
-		          <label ng-class="RECETA.nombre ? 'active':''" for="recetaNombre">Nombre</label>
-		        </div>
+          <input id="recetaNombre" type="text" ng-model="RECETA.nombre" ng-change="RECETA.$save()"
+          >
+          <label ng-class="RECETA.nombre ? 'active':''" for="recetaNombre">Nombre</label>
+        </div>
 			</div>
 		</div>
 		<div class="col s12">
@@ -36,16 +67,17 @@
 			<div class="col s12 m8">
 				<form name="formImagen" ng-submit="guardarImagen()">
 				    <div class="file-field input-field">
-				      	<div class="btn">
+				      	<div class="btn bg-principal">
 				        	<span>File</span>
 				       	 	<input type="file" required />
 				      	</div>
 				      	<div class="file-path-wrapper">
-				        	<input class="file-path validate" type="text" ng-model="RECETA.imagen.nombre" required />
+				        	<input class="file-path" type="text" ng-model="RECETA.imagen.nombre" required />
 				      	</div>
 				    </div>
 				    <button
-			            class="btn waves-effect waves-light col s12"
+			            class="btn waves-effect waves-light col s12 bg-principal
+									"
 			            type="submit"
 			            ng-disabled="formImagen.$invalid"
 			            >
@@ -68,7 +100,7 @@
 			          	ng-model="paso" required></textarea>
 			          <label for="textarea2">Ingrese paso a paso</label>
 			        </div>
-			        <button class="btn waves-effect waves-light col s12" type="submit"
+			        <button class="btn waves-effect waves-light col s12 bg-principal" type="submit"
 			        ng-disabled="formPaso.$invalid">	guardar paso
 					</button>
 				</form>
@@ -82,7 +114,7 @@
 	        		<h5>Paso {{$index + 1}}</h5>
 							<ul class="collection">
 				        <li class="collection-item">
-				        	<div class="teal-text text-lighten-1">{{paso.texto}}
+				        	<div class="color-principal">{{paso.texto}}
 					        	<a href=""
 					        		class="secondary-content"
 					        		ng-click="abrirEliminarModal(paso, 'Paso', ($index + 1), RECETA.id)"
@@ -118,7 +150,7 @@
 									<input id="crearIngrediente" type="text" ng-model="ingrediente" required>
 				          <label for="crearIngrediente">Ingrese un ingrediente</label>
 				        </div>
-				        <button class="btn waves-effect waves-light col s12" type="submit"
+				        <button class="btn waves-effect waves-light col s12 bg-principal" type="submit"
 				        ng-disabled="formIngrediente.$invalid">	guardar ingrediente
 						</button>
 					</form>
@@ -132,7 +164,7 @@
 		        		<h5>Ingrediente {{$index + 1}}</h5>
 								<ul class="collection">
 					        <li class="collection-item">
-					        	<div class="teal-text text-lighten-1">{{ingrediente.texto}}
+					        	<div class="color-principal">{{ingrediente.texto}}
 						        	<a href=""
 						        		class="secondary-content"
 						        		ng-click="abrirEliminarModal(ingrediente, 'Ingrediente', ($index + 1), RECETA.id)"
@@ -173,7 +205,7 @@
 			          	length="300"
 			          	ng-model="pasoTexto"></textarea>
 			        <button
-			        	class="btn waves-effect waves-light right"
+			        	class="btn waves-effect waves-light right bg-principal"
 			        	type="submit"
 			        	style="margin-bottom: 20px"
 			        	ng-click="cambiarPaso(pasoTexto, pasoId, recetaId, seccion)"
@@ -202,7 +234,7 @@
 		<div class="eliminarModalInterno">
 			<div class="row">
 				<div class="col s12" style="padding: 0 20px">
-					<h5>Esta seguro que desea eliminar</h5>
+					<h6>Esta seguro que desea eliminar</h6>
 					<h4>{{seccion}} {{eliminarIndex}}</h4>
 				</div>
 				<div

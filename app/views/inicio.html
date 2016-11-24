@@ -1,14 +1,12 @@
 <div class="row" style="margin-top:7px">
-  <div class="col s6 m4 l3 xl2">
+  <div class="col s6 m4 l3 xl2 carta" ng-repeat="receta in ALLRECIPE">
     <div class="card hoverable">
       <div class="card-image">
-        <img src='images/tastyhouselarge.gif' lazy-img="http://d28septx7rf3dp.cloudfront.net/sites/default/files/u27746/Depositphotos_38772135_m.jpg">
-        <span class="card-title">Carne la horno con papas</span>
+        <img src='images/tastyhouselarge.gif' lazy-img="{{receta.imagen.url}}">
+        <span class="card-title">{{receta.nombre}}</span>
       </div>
       <div class="card-content">
-        <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.
-        </p>
+        <p>{{receta.descripcion}}</p>
         <div class="call-data-contenedor">
           <div class="favorite-contenedor">
             <i class="material-icons">favorite</i>
@@ -22,11 +20,10 @@
       </div>
       <ul class="collection" style="border-right: none; border-left: none; border-bottom: none; margin:0">
         <li class="collection-item avatar">
-          <img src='images/tastyhouse.gif' lazy-img="http://labs.plantbio.cornell.edu/rose/images/thumbnails/joss100_bw.jpg" alt="" class="circle">
-          <span class="title">Alam Broski</span>
-          <p>
-            21 noviembre 2016
-          </p>
+          <img ng-show="!receta.usuario.avatar.url" src='images/avatar.jpg' alt="" class="circle">
+          <img ng-show="receta.usuario.avatar.url" src='images/tastyhouse.gif' lazy-img="{{receta.usuario.avatar.url}}" alt="" class="circle">
+          <span class="title">{{receta.usuario.nombre}} {{receta.usuario.apellido}}</span>
+          <p>{{receta.date | date: "longDate"}}</p>
         </li>
       </ul>
       <div class="call-to-action">

@@ -124,6 +124,14 @@ angular.module('recetasApp')
       },300);
     };
 
+    /* poner online */
+
+    $scope.ponerOnline = function(){
+      $rootScope.RECETA.status = 2;
+      $rootScope.RECETA.$save();
+      Materialize.toast( 'Felicidades su receta esta online!!!' , 4000, 'green lighten-1');
+    };
+
     $(document).ready(function() {
       $('input#input_text, textarea#textarea1').characterCounter();
     });

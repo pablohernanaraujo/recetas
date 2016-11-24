@@ -8,7 +8,7 @@
  * Controller of the recetasApp
  */
 angular.module('recetasApp')
-  .controller('PrivadoCtrl', function ($scope, $rootScope, Data, $timeout) {
+  .controller('PrivadoCtrl', function ($scope, $rootScope, Data, $timeout, Authentication) {
   	$('.button-collapse').sideNav('hide');
   	$rootScope.PAGE = 'privado';
 
@@ -49,6 +49,25 @@ angular.module('recetasApp')
       $timeout(function(){
         $scope.cerrarEliminarModal();
       },300);
+    };
+
+    $scope.guardarAvatar = function(){
+
+      var file = document.querySelector('input[type=file]').files[0];
+      var reader  = new FileReader();
+      var size = 500000;
+
+      if (file) {
+        if(file.size>size){
+          Materialize.toast( 'La imagen debe pesar menos de 1 mega.' , 4000, 'red lighten-1');
+        }else{
+          Materialize.toast( 'Guardando avatar...' , 4000);
+          reader.readAsDataURL(file);
+          Authentication.subirAvatar(file);
+        }
+      } else {
+        console.log('no exite la imagen');
+      }
     };
 
   	$(document).ready(function(){

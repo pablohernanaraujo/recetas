@@ -23,7 +23,7 @@ angular.module('recetasApp')
       firebaseDb: function(){
         return firebaseDb;
       },
-      firebaseS: function(){
+      firebaseST: function(){
         return firebaseST;
       }
     };

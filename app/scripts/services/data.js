@@ -4,6 +4,26 @@ angular.module('recetasApp')
   .factory('Data', function (Fire, firebase, $rootScope, Authentication) {
 
     return{
+      inicializarRecetas: function(){
+        Fire.firebaseDb().ref('recetas').on('value', function(snapshot) {
+          var todasLasRecetas = snapshot.val();
+          var allRecipe = [];
+          for (var k in todasLasRecetas){
+            if (todasLasRecetas.hasOwnProperty(k)){
+              var obj  = todasLasRecetas[k];
+              for (var i in obj){
+                if (obj.hasOwnProperty(i)){
+                  if(obj[i].status === 2){
+                    allRecipe.push(obj[i]);
+                  }
+                }
+              }
+            }
+          }
+          $rootScope.ALLRECIPE = allRecipe;
+          //console.log(allRecipe);
+        });
+      },
       crearReceta: function(receta, cb){
         var refReceta = Fire.firebaseDb().ref('recetas/' + $rootScope.USUARIO.id).push();
         var key = refReceta.key;
@@ -71,7 +91,6 @@ angular.module('recetasApp')
         }
 
         );
-
       },
       guardarPaso: function(paso, recetaId){
         var guardarPaso = Fire.firebaseDb().ref('recetas/'+$rootScope.USUARIO.id+'/'+recetaId)
