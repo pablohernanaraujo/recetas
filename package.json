@@ -41,5 +41,8 @@
   },
   "scripts": {
     "test": "karma start test\\karma.conf.js"
+  },
+  "dependencies": {
+    "nib": "^1.1.2"
   }
 }
