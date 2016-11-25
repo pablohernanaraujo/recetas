@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 m8 xl6 offset-m2 offset-xl3" style="padding: 20px 0px">
+      <a ui-sref="inicio" class="waves-effect waves-light btn bg-principal">
+        volver
+        <i class="material-icons left">arrow_back</i>
+      </a>
+    </div>
+    <div class="col s12 m8 xl6 offset-m2 offset-xl3">
+      <div class="card-panel valign-wrapper">
+        <div class="col s3">
+          <img ng-show="receta.usuario.avatar.url" src='images/tastyhouse.gif' lazy-img="{{receta.usuario.avatar.url}}" class="circle" width="60">
+        </div>
+        <div class="col s9">
+          <div class="black-text receta-usuario">
+            {{receta.usuario.nombre}} {{receta.usuario.apellido}}
+          </div>
+          <div class="receta-fecha">{{receta.date | date: "longDate"}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m8 xl6 offset-m2 offset-xl3 receta-acciones">
+      <a class="waves-effect waves-light btn bg-principal" style="border-radius:16px">
+        <i class="material-icons left">cloud</i>
+        button
+      </a>
+      <a class="waves-effect waves-light btn bg-principal" style="border-radius:16px">
+        <i class="material-icons left">cloud</i>
+        button
+      </a>
+      <a class="waves-effect waves-light btn-flat" style="border-radius:16px">
+        <i class="material-icons left">more_horiz</i>
+      </a>
+    </div>
+    <div class="col s12 m8 xl6 offset-m2 offset-xl3">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">{{receta.nombre}}</span>
+          <p>{{receta.descripcion}}</p>
+          <img src='images/tastyhouselarge.gif' lazy-img="{{receta.imagen.url}}"  class="receta-imagen">
+        </div>
+        <div class="card-content">
+          <ul class="collection with-header receta-ingredientes">
+            <li class="collection-header"><h4>Ingredientes</h4></li>
+            <li class="collection-item" ng-repeat="ingrediente in receta.ingredientes">
+              {{$index +1}} - {{ingrediente.texto}}
+            </li>
+          </ul>
+          <ul class="collection with-header receta-pasos">
+            <li class="collection-header"><h4>Pasos de preparación</h4></li>
+            <li class="collection-item" ng-repeat="paso in receta.pasos">
+              {{$index +1}} - {{paso.texto}}
+            </li>
+          </ul>
+        </div>
+      </div>
+      </div>
+  </div>
+</div>

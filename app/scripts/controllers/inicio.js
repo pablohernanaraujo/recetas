@@ -8,26 +8,9 @@
  * Controller of the recetasApp
  */
 angular.module('recetasApp')
-  .controller('InicioCtrl', function (Authentication, $scope, $rootScope, Fire, $firebaseObject) {
+  .controller('InicioCtrl', function (Authentication, $scope, $rootScope, Data) {
 
-    var cargarRecetas = Fire.firebaseDb().ref('recetas');
-    var recetasUsuarios = $firebaseObject(cargarRecetas);
-    recetasUsuarios.$loaded(function(data){
-      var allRecipe = [];
-      for (var k in data){
-        if (data.hasOwnProperty(k)){
-          var obj  = data[k];
-          for (var i in obj){
-            if (obj.hasOwnProperty(i)){
-              if(obj[i].status === 2){
-                allRecipe.push(obj[i]);
-              }
-            }
-          }
-        }
-      }
-      $scope.recipes = allRecipe;
-    });
+    Data.inicializarRecetas();
 
     $('.button-collapse').sideNav('hide');
     $rootScope.PAGE = 'inicio';

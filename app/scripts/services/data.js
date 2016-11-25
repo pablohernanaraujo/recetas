@@ -3,50 +3,26 @@
 angular.module('recetasApp')
   .factory('Data', function (Fire, firebase, $rootScope, Authentication, $firebaseObject) {
 
-    // var cargarRecetas = function(data){
-    //   var todasLasRecetas = data;
-    //   var allRecipe = [];
-    //   for (var k in todasLasRecetas){
-    //     if (todasLasRecetas.hasOwnProperty(k)){
-    //       var obj  = todasLasRecetas[k];
-    //       for (var i in obj){
-    //         if (obj.hasOwnProperty(i)){
-    //           if(obj[i].status === 2){
-    //             allRecipe.push(obj[i]);
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    //   $rootScope.ALLRECIPE = allRecipe;
-    //   console.log(allRecipe);
-    // };
     return{
       inicializarRecetas: function(){
-        // Fire.firebaseDb().ref('recetas').on('value', function(snapshot) {
-        //   var todasLasRecetas = snapshot.val();
-        //   var allRecipe = [];
-        //   for (var k in todasLasRecetas){
-        //     if (todasLasRecetas.hasOwnProperty(k)){
-        //       var obj  = todasLasRecetas[k];
-        //       for (var i in obj){
-        //         if (obj.hasOwnProperty(i)){
-        //           if(obj[i].status === 2){
-        //             allRecipe.push(obj[i]);
-        //           }
-        //         }
-        //       }
-        //     }
-        //   }
-        //   $rootScope.ALLRECIPE = allRecipe;
-        //   console.log(allRecipe);
-        // });
-
-        // var anfire = Fire.firebaseDb().ref('recetas');
-        // anfire.on('value', function(snapshot) {
-        //   cargarRecetas(snapshot.val());
-        // });
-
+        var cargarRecetas = Fire.firebaseDb().ref('recetas');
+        var recetasUsuarios = $firebaseObject(cargarRecetas);
+        recetasUsuarios.$loaded(function(data){
+          var allRecipe = [];
+          for (var k in data){
+            if (data.hasOwnProperty(k)){
+              var obj  = data[k];
+              for (var i in obj){
+                if (obj.hasOwnProperty(i)){
+                  if(obj[i].status === 2){
+                    allRecipe.push(obj[i]);
+                  }
+                }
+              }
+            }
+          }
+          $rootScope.RECIPES = allRecipe;
+        });
       },
       crearReceta: function(receta, cb){
         var refReceta = Fire.firebaseDb().ref('recetas/' + $rootScope.USUARIO.id).push();

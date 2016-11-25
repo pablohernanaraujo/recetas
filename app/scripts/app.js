@@ -36,6 +36,12 @@ angular
         controller: 'InicioCtrl'
       })
 
+      .state('receta',{
+        url: '/inicio/:id',
+        templateUrl: 'views/receta.html',
+        controller: 'RecetaCtrl'
+      })
+
       .state('privado',{
         url: '/privado',
         templateUrl: 'views/privado.html',
