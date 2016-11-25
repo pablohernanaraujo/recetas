@@ -1,7 +1,11 @@
 <div class="row" style="margin-top:7px">
+  <div ng-show="!recipes" class="col 12">
+    <h4>Cargando recetas ...</h4>
+    <p>{{recipes}}</p>
+  </div>
   <div class="col s12">
     <div id="columnas">
-      <div class="carta" ng-repeat="receta in ALLRECIPE">
+      <div class="carta" ng-repeat="receta in recipes">
         <div class="card hoverable">
           <div class="card-image">
             <img src='images/tastyhouselarge.gif' lazy-img="{{receta.imagen.url}}">

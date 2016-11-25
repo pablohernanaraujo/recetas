@@ -3,24 +3,24 @@
 angular.module('recetasApp')
   .factory('Data', function (Fire, firebase, $rootScope, Authentication, $firebaseObject) {
 
-    var cargarRecetas = function(data){
-      var todasLasRecetas = data;
-      var allRecipe = [];
-      for (var k in todasLasRecetas){
-        if (todasLasRecetas.hasOwnProperty(k)){
-          var obj  = todasLasRecetas[k];
-          for (var i in obj){
-            if (obj.hasOwnProperty(i)){
-              if(obj[i].status === 2){
-                allRecipe.push(obj[i]);
-              }
-            }
-          }
-        }
-      }
-      $rootScope.ALLRECIPE = allRecipe;
-      console.log(allRecipe);
-    };
+    // var cargarRecetas = function(data){
+    //   var todasLasRecetas = data;
+    //   var allRecipe = [];
+    //   for (var k in todasLasRecetas){
+    //     if (todasLasRecetas.hasOwnProperty(k)){
+    //       var obj  = todasLasRecetas[k];
+    //       for (var i in obj){
+    //         if (obj.hasOwnProperty(i)){
+    //           if(obj[i].status === 2){
+    //             allRecipe.push(obj[i]);
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    //   $rootScope.ALLRECIPE = allRecipe;
+    //   console.log(allRecipe);
+    // };
     return{
       inicializarRecetas: function(){
         // Fire.firebaseDb().ref('recetas').on('value', function(snapshot) {
@@ -42,10 +42,10 @@ angular.module('recetasApp')
         //   console.log(allRecipe);
         // });
 
-        var anfire = Fire.firebaseDb().ref('recetas');
-        anfire.on('value', function(snapshot) {
-          cargarRecetas(snapshot.val());
-        });
+        // var anfire = Fire.firebaseDb().ref('recetas');
+        // anfire.on('value', function(snapshot) {
+        //   cargarRecetas(snapshot.val());
+        // });
 
       },
       crearReceta: function(receta, cb){
