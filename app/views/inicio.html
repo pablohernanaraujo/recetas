@@ -1,39 +1,43 @@
 <div class="row" style="margin-top:7px">
-  <div class="col s6 m4 l3 xl2 carta" ng-repeat="receta in ALLRECIPE">
-    <div class="card hoverable">
-      <div class="card-image">
-        <img src='images/tastyhouselarge.gif' lazy-img="{{receta.imagen.url}}">
-        <span class="card-title">{{receta.nombre}}</span>
-      </div>
-      <div class="card-content">
-        <p>{{receta.descripcion}}</p>
-        <div class="call-data-contenedor">
-          <div class="favorite-contenedor">
-            <i class="material-icons">favorite</i>
-            <span>46</span>
+  <div class="col s12">
+    <div id="columnas">
+      <div class="carta" ng-repeat="receta in ALLRECIPE">
+        <div class="card hoverable">
+          <div class="card-image">
+            <img src='images/tastyhouselarge.gif' lazy-img="{{receta.imagen.url}}">
+            <span class="card-title">{{receta.nombre}}</span>
           </div>
-          <div class="basket-contenedor">
-            <i class="material-icons">shopping_basket</i>
-            <span>95</span>
+          <div class="card-content">
+            <p>{{receta.descripcion}}</p>
+            <div class="call-data-contenedor">
+              <div class="favorite-contenedor">
+                <i class="material-icons">favorite</i>
+                <span>46</span>
+              </div>
+              <div class="basket-contenedor">
+                <i class="material-icons">shopping_basket</i>
+                <span>95</span>
+              </div>
+            </div>
+          </div>
+          <ul class="collection" style="border-right: none; border-left: none; border-bottom: none; margin:0">
+            <li class="collection-item avatar">
+              <img ng-show="!receta.usuario.avatar.url" src='images/avatar.jpg' alt="" class="circle">
+              <img ng-show="receta.usuario.avatar.url" src='images/tastyhouse.gif' lazy-img="{{receta.usuario.avatar.url}}" alt="" class="circle">
+              <span class="title">{{receta.usuario.nombre}} {{receta.usuario.apellido}}</span>
+              <p>{{receta.date | date: "longDate"}}</p>
+            </li>
+          </ul>
+          <div class="call-to-action">
+            <a class="waves-effect waves-light btn white favorito">
+              <i class="material-icons left grey-text">favorite_border</i>
+            </a>
+            <a class="waves-effect waves-light btn bg-principal right guardar">
+              <i class="material-icons left">shopping_basket</i>
+              guardar
+            </a>
           </div>
         </div>
-      </div>
-      <ul class="collection" style="border-right: none; border-left: none; border-bottom: none; margin:0">
-        <li class="collection-item avatar">
-          <img ng-show="!receta.usuario.avatar.url" src='images/avatar.jpg' alt="" class="circle">
-          <img ng-show="receta.usuario.avatar.url" src='images/tastyhouse.gif' lazy-img="{{receta.usuario.avatar.url}}" alt="" class="circle">
-          <span class="title">{{receta.usuario.nombre}} {{receta.usuario.apellido}}</span>
-          <p>{{receta.date | date: "longDate"}}</p>
-        </li>
-      </ul>
-      <div class="call-to-action">
-        <a class="waves-effect waves-light btn white favorito">
-          <i class="material-icons left grey-text">favorite_border</i>
-        </a>
-        <a class="waves-effect waves-light btn bg-principal right guardar">
-          <i class="material-icons left">shopping_basket</i>
-          guardar
-        </a>
       </div>
     </div>
   </div>
