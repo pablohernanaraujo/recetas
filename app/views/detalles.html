@@ -101,13 +101,14 @@
 	          <option ng-value="category.texto" ng-repeat="category in categories">{{category.texto}}</option>
 	        </select>
 				</div>
-				<a
+				<button
 					class="btn waves-effect waves-light col s12 bg-principal"
 					ng-click="seleccionarCategoria(categorias.categoria)"
 					style="margin-bottom: 15px"
+					ng-disabled="!categorias.categoria"
 				>
 					guardar categoria
-				</a>
+				</button>
 				<div ng-show="!RECETA.categorias">
 					<h5>No tiene categoria/as.</h5>
 				</div>
@@ -224,11 +225,15 @@
 				<div class="col s12 m8">
 					<form name="formIngrediente" ng-submit="guardarIngrediente()">
 						<div class="input-field">
-									<input id="crearIngrediente" type="text" ng-model="ingrediente" required>
-				          <label for="crearIngrediente">Ingrese un ingrediente</label>
-				        </div>
-				        <button class="btn waves-effect waves-light col s12 bg-principal" type="submit"
-				        ng-disabled="formIngrediente.$invalid">	guardar ingrediente
+							<input id="crearIngrediente" type="text" ng-model="ingrediente" required>
+		          <label for="crearIngrediente">Ingrese un ingrediente</label>
+		        </div>
+			      <button
+							class="btn waves-effect waves-light col s12 bg-principal"
+							style="margin-bottom: 15px"
+			        ng-disabled="formIngrediente.$invalid"
+						>
+							guardar ingrediente
 						</button>
 					</form>
 	        <div ng-show="!RECETA.ingredientes">

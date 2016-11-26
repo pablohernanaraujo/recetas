@@ -35,6 +35,7 @@ angular.module('recetasApp')
         Materialize.toast( 'Debe seleccionar un categoria.' , 4000, 'red lighten-1');
       }else{
         Data.subirCategoria(categoria, $stateParams.id);
+        $scope.categorias = {};
       }
     };
 

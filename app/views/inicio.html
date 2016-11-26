@@ -21,8 +21,29 @@
               <img src='images/tastyhouselarge.gif' lazy-img="{{receta.imagen.url}}">
               <span class="card-title">{{receta.nombre}}</span>
             </div>
+
             <div class="card-content">
               <p>{{receta.descripcion}}</p>
+              <div class="inicio-categorias">
+                <div class="chip" ng-repeat="categoria in receta.categorias">
+      				    {{categoria.texto}}
+      				  </div>
+              </div>
+
+              <div class="inicio-tiempo">
+                <div class="chip " ng-repeat="tiempo in receta.time">
+      						<i class="fa fa-clock-o coccion-tiempo" aria-hidden="true"></i>
+      				    {{tiempo.hora}} hs {{tiempo.minuto}} min
+      				  </div>
+              </div>
+
+              <div>
+                <div class="chip" ng-repeat="porcion in receta.porciones">
+      						<i class="fa fa-users porciones-cantidad" aria-hidden="true"></i>
+      				    {{porcion.cantidad}}
+      				  </div>
+              </div>
+
               <div class="call-data-contenedor">
                 <div class="favorite-contenedor">
                   <i class="material-icons">favorite</i>
@@ -34,6 +55,7 @@
                 </div>
               </div>
             </div>
+            <!-- USUARIO -->
             <ul class="collection" style="border-right: none; border-left: none; border-bottom: none; margin:0">
               <li class="collection-item avatar">
                 <img ng-show="!receta.usuario.avatar" src='images/avatar.jpg' class="circle">
