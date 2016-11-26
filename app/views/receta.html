@@ -9,7 +9,8 @@
     <div class="col s12 m8 xl6 offset-m2 offset-xl3">
       <div class="card-panel valign-wrapper">
         <div class="col s3">
-          <img ng-show="receta.usuario.avatar.url" src='images/tastyhouse.gif' lazy-img="{{receta.usuario.avatar.url}}" class="circle" width="60">
+          <img ng-show="!receta.usuario.avatar" src='images/avatar.jpg' width="60">
+          <img ng-show="receta.usuario.avatar" src='images/avatar.jpg' lazy-img="{{receta.usuario.avatar.url}}" class="circle" width="60">
         </div>
         <div class="col s9">
           <div class="black-text receta-usuario">
@@ -20,17 +21,24 @@
       </div>
     </div>
     <div class="col s12 m8 xl6 offset-m2 offset-xl3 receta-acciones">
-      <a class="waves-effect waves-light btn bg-principal" style="border-radius:16px">
-        <i class="material-icons left">cloud</i>
-        button
+      <a href="" class="receta-btn-accion">
+        <i class="fa fa-heart" aria-hidden="true"></i>
+        <span>Favorito</span>
       </a>
-      <a class="waves-effect waves-light btn bg-principal" style="border-radius:16px">
-        <i class="material-icons left">cloud</i>
-        button
+      <a href="" class="receta-btn-accion">
+        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+        <span>Guardar</span>
+      </a>
+      <a href="" class="receta-btn-accion-extras">
+        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+      </a>
+      <!-- <a class="waves-effect waves-light btn bg-principal" style="border-radius:16px">
+        <i class="material-icons left">shopping_basket</i>
+        guardar
       </a>
       <a class="waves-effect waves-light btn-flat" style="border-radius:16px">
         <i class="material-icons left">more_horiz</i>
-      </a>
+      </a> -->
     </div>
     <div class="col s12 m8 xl6 offset-m2 offset-xl3">
       <div class="card">

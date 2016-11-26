@@ -24,6 +24,9 @@ angular.module('recetasApp')
           $rootScope.RECIPES = allRecipe;
         });
       },
+
+      /* RECETAS ZONA */
+
       crearReceta: function(receta, cb){
         var refReceta = Fire.firebaseDb().ref('recetas/' + $rootScope.USUARIO.id).push();
         var key = refReceta.key;
@@ -55,9 +58,31 @@ angular.module('recetasApp')
         var removeReceta = Fire.firebaseDb().ref('recetas/' + $rootScope.USUARIO.id).child(eliminar.id).remove();
         Materialize.toast( 'Receta eliminada exitosamente' , 4000, 'green lighten-1');
       },
+
+      /* RECETA DETALLES */
+
       miReceta: function(recetaId){
         Authentication.usuarioActual(recetaId);
       },
+
+      /* CATEGORIA ZONA */
+
+      subirCategoria: function(categoria, recetaId){
+        var subirCategoria = Fire.firebaseDb().ref('recetas/' + $rootScope.USUARIO.id +   '/'+ recetaId +'/categorias').push();
+        var key = subirCategoria.key;
+        var data = {
+          texto: categoria,
+          id: key
+        };
+        subirCategoria.set(data);
+        Materialize.toast( 'Categoria guardada exitosamente' , 4000, 'green lighten-1');
+      },
+      eliminarCategoria: function(categoriaId, recetaId){
+        Fire.firebaseDb().ref('recetas/' + $rootScope.USUARIO.id +   '/'+ recetaId +'/categorias/' + categoriaId).remove();
+      },
+
+      /* IMAGEN ZONA */
+
       subirImagen: function(imagen, recetaId){
 
         var guardarImagen = Fire.firebaseST().ref().child('imagenes/' + imagen.name).put(imagen);
@@ -92,6 +117,9 @@ angular.module('recetasApp')
 
         );
       },
+
+      /* PASOS ZONA */
+
       guardarPaso: function(paso, recetaId){
         var guardarPaso = Fire.firebaseDb().ref('recetas/'+$rootScope.USUARIO.id+'/'+recetaId)
           .child('pasos').push();
@@ -146,6 +174,74 @@ angular.module('recetasApp')
           .child('ingredientes/'+ eliminar).remove();
 
         Materialize.toast( 'Paso eliminado exitosamente' , 4000, 'green lighten-1');
-      }
+      },
+
+      /* COCCION ZONA */
+
+      guardarCoccion: function(hora, min, recetaId){
+        if($rootScope.RECETA.time){
+          Fire.firebaseDb().ref('recetas/'+$rootScope.USUARIO.id+'/'+recetaId)
+            .child('time').remove().then(function(){
+              var guardarCoccion = Fire.firebaseDb().ref('recetas/'+$rootScope.USUARIO.id+'/'+recetaId)
+                .child('time').push();
+
+              var key = guardarCoccion.key;
+              var newCoccion = {
+                hora: hora,
+                minuto: min,
+                id: key
+              };
+              guardarCoccion.set(newCoccion);
+            });
+        }else{
+          var guardarCoccion = Fire.firebaseDb().ref('recetas/'+$rootScope.USUARIO.id+'/'+recetaId)
+            .child('time').push();
+
+          var key = guardarCoccion.key;
+          var newCoccion = {
+            hora: hora,
+            minuto: min,
+            id: key
+          };
+          guardarCoccion.set(newCoccion);
+        }
+      },
+      eliminarCoccion: function(recetaId){
+        Fire.firebaseDb().ref('recetas/'+$rootScope.USUARIO.id+'/'+recetaId)
+          .child('time').remove();
+      },
+
+      /* PORCIONES ZONA */
+
+      guardarPorciones: function(porcion, recetaId){
+        if($rootScope.RECETA.porciones){
+          Fire.firebaseDb().ref('recetas/'+$rootScope.USUARIO.id+'/'+recetaId)
+            .child('porciones').remove().then(function(){
+              var guardarPorciones = Fire.firebaseDb().ref('recetas/'+$rootScope.USUARIO.id+'/'+recetaId)
+                .child('porciones').push();
+
+              var key = guardarPorciones.key;
+              var newPorciones = {
+                cantidad: porcion ,
+                id: key
+              };
+              guardarPorciones.set(newPorciones);
+            });
+        }else{
+          var guardarPorciones = Fire.firebaseDb().ref('recetas/'+$rootScope.USUARIO.id+'/'+recetaId)
+            .child('porciones').push();
+
+          var key = guardarPorciones.key;
+          var newPorciones = {
+            cantidad: porcion ,
+            id: key
+          };
+          guardarPorciones.set(newPorciones);
+        }
+      },
+      eliminarPorciones: function(recetaId){
+        Fire.firebaseDb().ref('recetas/'+$rootScope.USUARIO.id+'/'+recetaId)
+          .child('porciones').remove();
+      },
     };
   });

@@ -13,6 +13,38 @@ angular.module('recetasApp')
 
     Data.miReceta($stateParams.id);
 
+    /* PONER ONLINE */
+
+    $scope.ponerOnline = function(){
+      $rootScope.RECETA.status = 2;
+      $rootScope.RECETA.$save();
+      Materialize.toast( 'Felicidades su receta esta online!!!' , 4000, 'green lighten-1');
+    };
+
+    /* CATEGORIAS */
+
+    $scope.categories = [
+      {texto: 'Pastas'},
+      {texto: 'Carnes'},
+      {texto: 'Vegetariana'}
+    ];
+    $scope.categorias = {};
+
+    $scope.seleccionarCategoria = function(categoria){
+      if(categoria === undefined){
+        Materialize.toast( 'Debe seleccionar un categoria.' , 4000, 'red lighten-1');
+      }else{
+        Data.subirCategoria(categoria, $stateParams.id);
+      }
+    };
+
+    $scope.eliminarCategoria = function(categoriaId){
+      Data.eliminarCategoria(categoriaId, $stateParams.id);
+      Materialize.toast( 'Categoria eliminada.' , 4000);
+    };
+
+    /* IMAGEN */
+
     $scope.guardarImagen = function(){
 
       var file = document.querySelector('input[type=file]').files[0];
@@ -32,12 +64,87 @@ angular.module('recetasApp')
       }
     };
 
+    /* PASOS */
+
     $scope.guardarPaso = function(){
       Data.guardarPaso($scope.paso, $stateParams.id);
       $timeout(function(){
         $scope.paso = '';
       },300);
     };
+
+    $scope.cambiarPaso = function(paso, pasoId, recetaId, seccion){
+      if(seccion === 'Paso'){
+        Data.cambiarPaso(paso, pasoId, recetaId);
+      }
+      if(seccion === 'Ingrediente'){
+        Data.cambiarIngrediente(paso, pasoId, recetaId);
+      }
+    };
+
+    $scope.eliminarPaso = function(eliminar, eliminarRecetaId, seccion){
+      if(seccion === 'Paso'){
+        Data.eliminarPaso(eliminar, eliminarRecetaId);
+      }
+      if(seccion === 'Ingrediente'){
+        Data.eliminarIngrediente(eliminar, eliminarRecetaId);
+      }
+
+      $timeout(function(){
+        $scope.cerrarEliminarModal();
+      },300);
+    };
+
+    /* INGREDIENTES ZONA */
+
+    $scope.guardarIngrediente = function(){
+      Data.guardarIngrediente($scope.ingrediente, $stateParams.id);
+      $timeout(function(){
+        $scope.ingrediente= '';
+      },300);
+    };
+
+    /* COCCION */
+
+    $scope.coccion = {};
+
+    $scope.guardarCoccion = function(hora, min){
+      if (hora === '0' ) {
+        if (min === '0' ) {
+          Materialize.toast( 'Debe seleccionar tiempo diferente de cero.' , 4000, 'red lighten-1');
+        }else{
+          Data.guardarCoccion(hora, min, $stateParams.id);
+          $scope.coccion = {};
+          Materialize.toast( 'Tiempo de cocción guardado exitosamente.' , 4000, 'green lighten-1');
+        }
+      }else{
+        Data.guardarCoccion(hora, min, $stateParams.id);
+        $scope.coccion = {};
+        Materialize.toast( 'Tiempo de cocción guardado exitosamente.' , 4000, 'green lighten-1');
+      }
+    };
+
+    $scope.eliminarCoccion = function(){
+      Data.eliminarCoccion($stateParams.id);
+      Materialize.toast( 'Tiempo de cocción eliminado.' , 4000);
+    };
+
+    /* PORCIONES */
+
+    $scope.porciones = {};
+
+    $scope.guardarPorciones = function(porcion){
+      Data.guardarPorciones(porcion, $stateParams.id);
+      $scope.porciones = {};
+      Materialize.toast( 'Porciones guardadas exitosamente.' , 4000, 'green lighten-1');
+    };
+
+    $scope.eliminarPorciones = function(){
+      Data.eliminarPorciones($stateParams.id);
+      Materialize.toast( 'Porciones eliminada.' , 4000);
+    };
+
+    /* MODALES */
 
     $scope.abrirPasosModal = function(paso, seccion, index, recetaId){
       $('.pasosModal').css({
@@ -66,16 +173,6 @@ angular.module('recetasApp')
       }, 500);
     };
 
-    $scope.cambiarPaso = function(paso, pasoId, recetaId, seccion){
-      if(seccion === 'Paso'){
-        Data.cambiarPaso(paso, pasoId, recetaId);
-      }
-      if(seccion === 'Ingrediente'){
-        Data.cambiarIngrediente(paso, pasoId, recetaId);
-      }
-    };
-
-
     $scope.abrirEliminarModal = function(paso, seccion, index, recetaId){
       $('.eliminarModal').css({
         display: 'block'
@@ -100,36 +197,6 @@ angular.module('recetasApp')
           display: 'none'
         });
       }, 500);
-    };
-
-    $scope.eliminarPaso = function(eliminar, eliminarRecetaId, seccion){
-      if(seccion === 'Paso'){
-        Data.eliminarPaso(eliminar, eliminarRecetaId);
-      }
-      if(seccion === 'Ingrediente'){
-        Data.eliminarIngrediente(eliminar, eliminarRecetaId);
-      }
-
-      $timeout(function(){
-        $scope.cerrarEliminarModal();
-      },300);
-    };
-
-    /* INGREDIENTES ZONA */
-
-    $scope.guardarIngrediente = function(){
-      Data.guardarIngrediente($scope.ingrediente, $stateParams.id);
-      $timeout(function(){
-        $scope.ingrediente= '';
-      },300);
-    };
-
-    /* poner online */
-
-    $scope.ponerOnline = function(){
-      $rootScope.RECETA.status = 2;
-      $rootScope.RECETA.$save();
-      Materialize.toast( 'Felicidades su receta esta online!!!' , 4000, 'green lighten-1');
     };
 
     $(document).ready(function() {

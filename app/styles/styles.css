@@ -302,6 +302,12 @@ h6 {
   -moz-column-gap: 20px;
   column-gap: 20px;
 }
+.preloader-wrapper {
+  margin: 10px 0 0 10px;
+}
+.preloader-wrapper .spinner-layer {
+  border-color: #e72c4b;
+}
 @media screen and (max-width: 1920px) {
   #columnas {
     -webkit-column-count: 6;
@@ -357,7 +363,59 @@ h6 {
   color: rgba(0,0,0,0.5);
 }
 .receta-acciones {
-  margin-bottom: 10px;
+  margin: 5px 0px 13px;
+}
+.receta-btn-accion {
+  background-color: #e72c4b;
+  margin: 0;
+  padding: 8px 15px;
+  color: #fff;
+  border-radius: 15px;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  margin-right: 8px;
+}
+.receta-btn-accion i {
+  font-size: 14px;
+  margin-right: 5px;
+}
+.receta-btn-accion:hover {
+  -webkit-box-shadow: 0 4px 4px 0 rgba(0,0,0,0.14), 0 3px 7px 0 rgba(0,0,0,0.12), 0 5px 3px -4px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.14), 0 3px 7px 0 rgba(0,0,0,0.12), 0 5px 3px -4px rgba(0,0,0,0.2);
+  background-color: #ec5a72;
+}
+.receta-btn-accion-extras {
+  background-color: #fff;
+  margin: 0;
+  padding: 8px 12px;
+  color: #333;
+  border-radius: 15px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  margin-right: 8px;
+}
+.receta-btn-accion-extras i {
+  font-size: 14px;
+}
+.receta-btn-accion-extras:hover {
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+}
+@media screen and (max-width: 650px) {
+  .receta-btn-accion {
+    background-color: #e72c4b;
+    margin: 0;
+    padding: 8px 15px;
+    color: #fff;
+    border-radius: 15px;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    margin-right: 8px;
+  }
 }
 .tabs .tab a .active {
   color: #e72c4b !important;
@@ -458,6 +516,33 @@ button:hover {
   padding: 5px 15px;
   margin-right: 15px;
   border-radius: 3px;
+}
+.dropdown-content li > span {
+  color: #e72c4b;
+}
+.coccion-tiempo {
+  float: left;
+  margin: 0 8px 0 -12px;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 32px;
+  font-size: 20px;
+  background-color: #ccc;
+  color: #e72c4b;
+}
+.porciones-cantidad {
+  float: left;
+  margin: 0 8px 0 -12px;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 32px;
+  font-size: 20px;
+  background-color: #ccc;
+  color: #e72c4b;
 }
 @media screen and (max-width: 650px) {
   .pasosModalInterno {

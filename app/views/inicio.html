@@ -1,6 +1,16 @@
 <div class="row" style="margin-top:7px">
   <div ng-show="!RECIPES" class="col 12">
-    <h4>Cargando recetas ...</h4>
+    <div class="preloader-wrapper active">
+      <div class="spinner-layer spinner-green-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="col s12">
     <div id="columnas">
@@ -26,7 +36,8 @@
             </div>
             <ul class="collection" style="border-right: none; border-left: none; border-bottom: none; margin:0">
               <li class="collection-item avatar">
-                <img src="images/avatar.jpg" lazy-img="{{receta.usuario.avatar.url}}" alt="" class="circle">
+                <img ng-show="!receta.usuario.avatar" src='images/avatar.jpg' class="circle">
+                <img ng-show="receta.usuario.avatar" src="images/avatar.jpg" lazy-img="{{receta.usuario.avatar.url}}" alt="" class="circle">
                 <span class="title">{{receta.usuario.nombre}} {{receta.usuario.apellido}}</span>
                 <p>{{receta.date | date: "longDate"}}</p>
               </li>

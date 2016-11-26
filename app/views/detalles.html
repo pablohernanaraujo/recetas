@@ -1,11 +1,20 @@
+<!-- BOTON VOLVER -->
+
 <div class="container">
 	<div class="row">
-		<div class="col s12" style="padding: 20px 0px">
+		<div class="col s12" style="padding: 20px 0px 0px">
 			<a ui-sref="privado" class="waves-effect waves-light btn bg-principal">
 				volver
 				<i class="material-icons left">arrow_back</i>
 			</a>
 		</div>
+	</div>
+</div>
+
+<!-- AVISO -->
+
+<div class="container">
+	<div class="row">
 		<div class="col s12">
       <div class="card ">
         <div class="card-content ">
@@ -20,7 +29,7 @@
         <div class="card-action">
 					<a
 						class="btn waves-effect waves-light bg-principal"
-						ng-disabled="!RECETA.imagen.size || !RECETA.nombre || !RECETA.descripcion || !RECETA.pasos || !RECETA.ingredientes || RECETA.status !== 1"
+						ng-disabled="!RECETA.imagen.size || !RECETA.nombre || !RECETA.descripcion || !RECETA.pasos || !RECETA.ingredientes || !RECETA.categorias || !RECETA.time || !RECETA.porciones || RECETA.status !== 1"
 						ng-click="ponerOnline()"
 					>
 						poner online
@@ -37,6 +46,13 @@
 				</div>
       </div>
     </div>
+	</div>
+</div>
+
+<!-- NOMBRE -->
+
+<div class="container">
+	<div class="row">
 		<div class="col s12">
 			<div class="col s12 m4">
 				<h5>Nombre de la receta</h5>
@@ -49,46 +65,103 @@
         </div>
 			</div>
 		</div>
+	</div>
+</div>
+
+<!-- DESCRIPCION -->
+
+<div class="container">
+	<div class="row">
 		<div class="col s12">
 			<div class="col s12 m4">
 				<h5>Descripción</h5>
 			</div>
 			<div class="col s12 m8">
 				<div class="input-field">
-		          <textarea id="textarea1" class="materialize-textarea" ng-model="RECETA.descripcion" ng-change="RECETA.$save()" length="200"></textarea>
-		          <label ng-class="RECETA.descripcion ? 'active':''" for="textarea1">Ingrese una descripción</label>
-		        </div>
+          <textarea id="textarea1" class="materialize-textarea" ng-model="RECETA.descripcion" ng-change="RECETA.$save()" length="200"></textarea>
+          <label ng-class="RECETA.descripcion ? 'active':''" for="textarea1">Ingrese una descripción</label>
+        </div>
 			</div>
 		</div>
+	</div>
+</div>
+
+<!-- CATEGORIAS  -->
+
+<div class="container">
+	<div class="row">
+		<div class="col s12">
+			<div class="col s12 m4">
+				<h5>Categorias</h5>
+			</div>
+			<div class="col s12 m8">
+				<div input-field>
+					<select ng-model="categorias.categoria" material-select watch>
+	          <option value="" disabled selected>Seleciona una opcion</option>
+	          <option ng-value="category.texto" ng-repeat="category in categories">{{category.texto}}</option>
+	        </select>
+				</div>
+				<a
+					class="btn waves-effect waves-light col s12 bg-principal"
+					ng-click="seleccionarCategoria(categorias.categoria)"
+					style="margin-bottom: 15px"
+				>
+					guardar categoria
+				</a>
+				<div ng-show="!RECETA.categorias">
+					<h5>No tiene categoria/as.</h5>
+				</div>
+				<div ng-show="RECETA.categorias">
+					<h4>Listado de categorias.</h4>
+					<div class="chip" ng-repeat="categoria in RECETA.categorias">
+				    {{categoria.texto}}
+				    <i class="close material-icons" ng-click="eliminarCategoria(categoria.id)">close</i>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- IMAGEN -->
+
+<div class="container">
+	<dov class="row">
 		<div class="col s12">
 			<div class="col s12 m4">
 				<h5>Imagen</h5>
 			</div>
 			<div class="col s12 m8">
 				<form name="formImagen" ng-submit="guardarImagen()">
-				    <div class="file-field input-field">
-				      	<div class="btn bg-principal">
-				        	<span>File</span>
-				       	 	<input type="file" required />
-				      	</div>
-				      	<div class="file-path-wrapper">
-				        	<input class="file-path" type="text" ng-model="RECETA.imagen.nombre" required />
-				      	</div>
-				    </div>
-				    <button
-			            class="btn waves-effect waves-light col s12 bg-principal
-									"
-			            type="submit"
-			            ng-disabled="formImagen.$invalid"
-			            >
-			              guardar imagen
-			        </button>
+			    <div class="file-field input-field">
+		      	<div class="btn bg-principal">
+		        	<span>File</span>
+		       	 	<input type="file" required />
+		      	</div>
+		      	<div class="file-path-wrapper">
+		        	<input class="file-path" type="text" ng-model="RECETA.imagen.nombre" required />
+		      	</div>
+			    </div>
+			    <button
+            class="btn waves-effect waves-light col s12 bg-principal"
+            type="submit"
+            ng-disabled="formImagen.$invalid"
+	        >
+	          guardar imagen
+	        </button>
 				</form>
 			</div>
 		</div>
+	</dov>
+</div>
+
+<!-- PASOS -->
+
+<div class="container">
+	<div class="row">
 		<div class="col s12">
 			<div class="col s12 m4">
-				<h5>Paso a paso</h5>
+				<h5>Pasos de preparación</h5>
 			</div>
 			<div class="col s12 m8">
 				<form name="formPaso" ng-submit="guardarPaso()">
@@ -98,7 +171,7 @@
 			          	class="materialize-textarea"
 			          	length="300"
 			          	ng-model="paso" required></textarea>
-			          <label for="textarea2">Ingrese paso a paso</label>
+			          <label for="textarea2">Ingrese paso</label>
 			        </div>
 			        <button class="btn waves-effect waves-light col s12 bg-principal" type="submit"
 			        ng-disabled="formPaso.$invalid">	guardar paso
@@ -138,12 +211,16 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col s12">
-				<div class="col s12 m4">
-					<h5>Ingredientes</h5>
-				</div>
+</div>
+
+<!-- INGREDIENTES -->
+
+<div class="container">
+	<div class="row">
+		<div class="col s12">
+			<div class="col s12 m4">
+				<h5>Ingredientes</h5>
+			</div>
 				<div class="col s12 m8">
 					<form name="formIngrediente" ng-submit="guardarIngrediente()">
 						<div class="input-field">
@@ -154,40 +231,189 @@
 				        ng-disabled="formIngrediente.$invalid">	guardar ingrediente
 						</button>
 					</form>
-					<div class="col s12" style="height: 20px"></div>
-		        <div ng-show="!RECETA.ingredientes">
-		        	<h5>No tienes ingredientes creados.</h5>
-		        </div>
-		        <div ng-show="RECETA.ingredientes">
-		        	<h4>Listado de los ingredientesr.</h4>
-		        	<div ng-repeat="ingrediente in RECETA.ingredientes">
-		        		<h5>Ingrediente {{$index + 1}}</h5>
-								<ul class="collection">
-					        <li class="collection-item">
-					        	<div class="color-principal">{{ingrediente.texto}}
-						        	<a href=""
-						        		class="secondary-content"
-						        		ng-click="abrirEliminarModal(ingrediente, 'Ingrediente', ($index + 1), RECETA.id)"
-						        		style="color: #ef5350"
-						        	>
-						        		<i class="material-icons">delete</i>
-						        	</a>
-						        	<a href=""
-						        		class="secondary-content"
-						        		ng-click="abrirPasosModal(ingrediente, 'Ingrediente', ($index + 1), RECETA.id)"
-						        		style="margin-right: 10px"
-						        	>
-						        		<i class="material-icons">mode_edit</i>
-						        	</a>
-										</div>
-					        </li>
-					    	</ul>
-					    </div>
-						</div>
-		      </div>
+	        <div ng-show="!RECETA.ingredientes">
+	        	<h5>No tienes ingredientes creados.</h5>
+	        </div>
+	        <div ng-show="RECETA.ingredientes">
+	        	<h4>Listado de los ingredientesr.</h4>
+	        	<div ng-repeat="ingrediente in RECETA.ingredientes">
+	        		<h5>Ingrediente {{$index + 1}}</h5>
+							<ul class="collection">
+				        <li class="collection-item">
+				        	<div class="color-principal">{{ingrediente.texto}}
+					        	<a href=""
+					        		class="secondary-content"
+					        		ng-click="abrirEliminarModal(ingrediente, 'Ingrediente', ($index + 1), RECETA.id)"
+					        		style="color: #ef5350"
+					        	>
+					        		<i class="material-icons">delete</i>
+					        	</a>
+					        	<a href=""
+					        		class="secondary-content"
+					        		ng-click="abrirPasosModal(ingrediente, 'Ingrediente', ($index + 1), RECETA.id)"
+					        		style="margin-right: 10px"
+					        	>
+					        		<i class="material-icons">mode_edit</i>
+					        	</a>
+									</div>
+				        </li>
+				    	</ul>
+				    </div>
+					</div>
+	      </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- TIEMPO DE COCCION -->
+
+<div class="container">
+	<div class="row">
+		<div class="col s12">
+			<div class="col s12 m4">
+				<h5>Tiempo de cocción</h5>
+			</div>
+			<div class="col s12 m8">
+				<div input-field class="col s6">
+					<select ng-model="coccion.hora" material-select watch>
+						<option value="" disabled selected>Seleccione hora</option>
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+					</select>
+				</div>
+				<div input-field class="col s6">
+					<select ng-model="coccion.min" material-select watch>
+						<option value="" disabled selected>Seleccione minutos</option>
+						<option value="0">0</option>
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="25">25</option>
+						<option value="30">30</option>
+						<option value="35">35</option>
+						<option value="40">40</option>
+						<option value="45">45</option>
+						<option value="50">50</option>
+						<option value="55">55</option>
+					</select>
+				</div>
+				<button
+					class="btn waves-effect waves-light col s12 bg-principal"
+					ng-click="guardarCoccion(coccion.hora, coccion.min)"
+					style="margin-bottom: 15px"
+					ng-disabled="!coccion.hora || !coccion.min"
+				>
+					guardar tiempo de cocción
+				</button>
+				<div ng-show="!RECETA.time">
+					<h5>No tiene tiempo de cocción.</h5>
+				</div>
+				<div ng-show="RECETA.time">
+					<h4>Tiempo de cocción.</h4>
+					<div class="chip" ng-repeat="tiempo in RECETA.time">
+						<i class="fa fa-clock-o coccion-tiempo" aria-hidden="true"></i>
+				    {{tiempo.hora}} hs {{tiempo.minuto}} min
+				    <i class="close material-icons" ng-click="eliminarCoccion()">close</i>
+				  </div>
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+
+<!-- PORCIONES -->
+
+<div class="container">
+	<div class="row">
+		<div class="col s12">
+			<div class="col s12 m4">
+				<h5>Cantidad de porciones</h5>
+			</div>
+			<div class="col s12 m8">
+				<div input-field>
+					<select ng-model="porciones.cantidad" material-select watch>
+						<option value="" disabled selected>Seleccione porciones</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+				</div>
+				<button
+					class="btn waves-effect waves-light col s12 bg-principal"
+					ng-click="guardarPorciones(porciones.cantidad)"
+					style="margin-bottom: 15px"
+					ng-disabled="!porciones.cantidad"
+				>
+					guardar porciones
+				</button>
+				<div ng-show="!RECETA.porciones">
+					<h5>No tiene tiempo de cocción.</h5>
+				</div>
+				<div ng-show="RECETA.porciones">
+					<h4>Tiempo de cocción.</h4>
+					<div class="chip" ng-repeat="porcion in RECETA.porciones">
+						<i class="fa fa-users porciones-cantidad" aria-hidden="true"></i>
+				    {{porcion.cantidad}}
+				    <i class="close material-icons" ng-click="eliminarPorciones()">close</i>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- AVISO -->
+
+<div class="container">
+	<div class="row">
+		<div class="col s12">
+      <div class="card ">
+        <div class="card-content ">
+          <span class="card-title">Aviso importante</span>
+          <p>
+						Para poner la receta online se deberan llenar todos los campos.
+					</p>
+					<p>
+						Asi el boton se habilitara.
+					</p>
+        </div>
+        <div class="card-action">
+					<a
+						class="btn waves-effect waves-light bg-principal"
+						ng-disabled="!RECETA.imagen.size || !RECETA.nombre || !RECETA.descripcion || !RECETA.pasos || !RECETA.ingredientes || !RECETA.categorias || !RECETA.time || !RECETA.porciones || RECETA.status !== 1"
+						ng-click="ponerOnline()"
+					>
+						poner online
+				    <i class="material-icons right">file_upload</i>
+				  </a>
+        </div>
+				<div class="enlinea-contenedor">
+					<p ng-show="RECETA.status === 2" class="enlinea teal">
+						Receta Online
+					</p>
+					<p ng-show="RECETA.status === 1" class="fueradelinea">
+						Receta Offline
+					</p>
+				</div>
+      </div>
+    </div>
 	</div>
 </div>
 
