@@ -3,28 +3,8 @@
 angular.module('recetasApp')
   .factory('Data', function (Fire, firebase, $rootScope, Authentication, $firebaseObject) {
 
-    var cargarRecetas = Fire.firebaseDb().ref('recetas').on('value',function(snapshot){
-      var recetasUsuarios = snapshot.val();
-
-      var allRecipe = [];
-      for (var k in recetasUsuarios){
-        if (recetasUsuarios.hasOwnProperty(k)){
-          var obj  = recetasUsuarios[k];
-          for (var i in obj){
-            if (obj.hasOwnProperty(i)){
-              if(obj[i].status === 2){
-                allRecipe.push(obj[i]);
-              }
-            }
-          }
-        }
-      }
-      $rootScope.RECIPES = allRecipe;
-
-    });
-
     return{
-      // inicializarRecetas: function(){
+      inicializarRecetas: function(){
       //   var cargarRecetas = Fire.firebaseDb().ref('recetas');
       //   var recetasUsuarios = $firebaseObject(cargarRecetas);
       //   recetasUsuarios.$loaded(function(data){
@@ -43,7 +23,25 @@ angular.module('recetasApp')
       //     }
       //     $rootScope.RECIPES = allRecipe;
       //   });
-      // },
+        var cargarRecetas = Fire.firebaseDb().ref('recetas').on('value',function(snapshot){
+          var recetasUsuarios = snapshot.val();
+
+          var allRecipe = [];
+          for (var k in recetasUsuarios){
+            if (recetasUsuarios.hasOwnProperty(k)){
+              var obj  = recetasUsuarios[k];
+              for (var i in obj){
+                if (obj.hasOwnProperty(i)){
+                  if(obj[i].status === 2){
+                    allRecipe.push(obj[i]);
+                  }
+                }
+              }
+            }
+          }
+          $rootScope.RECIPES = allRecipe;
+        });
+      },
 
       /* RECETAS ZONA */
 
